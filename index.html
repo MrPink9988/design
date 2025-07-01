@@ -1,0 +1,342 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>App Design Showcase</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      height: 100%;
+      font-family: 'Helvetica Neue', sans-serif;
+      overflow-x: hidden;
+    }
+    body {
+      background: #fff;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      background: #111827;
+      color: white;
+      padding: 1rem 0;
+      z-index: 1000;
+    }
+    .nav-button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .page {
+      display: none;
+      min-height: 100vh;
+      padding-top: 4rem;
+    }
+    .page.active {
+      display: block;
+    }
+    .app {
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    /* Design 1: Mental Health */
+    #design1 {
+      background: linear-gradient(to bottom right, #dbeafe, #f0f4ff);
+      color: #333;
+    }
+    #design1 .tool-card {
+      margin: 1rem;
+      padding: 1rem 1.5rem;
+      border-radius: 16px;
+      color: white;
+      font-size: 1.1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 500;
+    }
+    .card-purple { background: linear-gradient(135deg, #8b5cf6, #6366f1); }
+    .card-orange { background: linear-gradient(135deg, #f97316, #f43f5e); }
+    .card-green { background: linear-gradient(135deg, #10b981, #22c55e); }
+    .card-blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+    .card-gray { background: #e5e7eb; color: #9ca3af; }
+    .chart-section {
+      margin: 2rem 1rem;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .placeholder-chart {
+      height: 120px;
+      background: repeating-linear-gradient(
+        to right,
+        #d1d5db,
+        #d1d5db 5px,
+        transparent 5px,
+        transparent 10px
+      );
+      border-radius: 10px;
+    }
+
+    /* Design 2: LMS */
+    #design2 {
+      background: #fefefe;
+    }
+    #design2 .profile-card {
+      background: #fef3c7;
+      padding: 1rem;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    #design2 .avatar {
+      background: #fcd34d;
+      border-radius: 50%;
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-right: 1rem;
+    }
+    #design2 .user-info {
+      display: flex;
+      flex-direction: column;
+    }
+    #design2 .course-list {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    #design2 .course {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 0.95rem;
+    }
+
+    /* Design 3: Dark Messenger */
+    #design3 {
+      background: linear-gradient(to bottom, #1f2937, #111827);
+      color: white;
+    }
+    #design3 .chat-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: #374151;
+      border-radius: 16px;
+      margin-bottom: 1rem;
+    }
+    #design3 .chat-header img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+    }
+    #design3 .chat-thread {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    #design3 .chat-bubble {
+      max-width: 70%;
+      margin: 0.5rem 0;
+      padding: 0.75rem 1rem;
+      border-radius: 16px;
+      line-height: 1.4;
+    }
+    .bubble-received {
+      background: #374151;
+      align-self: flex-start;
+    }
+    .bubble-sent {
+      background: #2563eb;
+      align-self: flex-end;
+    }
+
+    /* Design 4: Dashboard */
+    #design4 {
+      background: #f9fafb;
+      color: #1f2937;
+    }
+    #design4 .balance-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    #design4 .overview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    #design4 .overview-card {
+      background: white;
+      padding: 1rem;
+      border-radius: 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    /* Design 5: Entertainment */
+    #design5 {
+      background: #fff;
+      color: #1f2937;
+    }
+    #design5 .media-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    #design5 .media-tile {
+      background: #f3f4f6;
+      border-radius: 12px;
+      overflow: hidden;
+      text-align: center;
+      padding: 1rem 0.5rem;
+      font-size: 0.9rem;
+    }
+    #design5 .media-tile img {
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <button class="nav-button" onclick="showPage(1)">Design 1</button>
+    <button class="nav-button" onclick="showPage(2)">Design 2</button>
+    <button class="nav-button" onclick="showPage(3)">Design 3</button>
+    <button class="nav-button" onclick="showPage(4)">Design 4</button>
+    <button class="nav-button" onclick="showPage(5)">Design 5</button>
+  </div>
+
+  <div id="design1" class="page active">
+    <div class="app">
+      <h2>Tools</h2>
+      <div class="tool-card card-purple">Mood journal <span>📔</span></div>
+      <div class="tool-card card-orange">Mood boosters <span>🚀</span></div>
+      <div class="tool-card card-green">Positive activities <span>😊</span></div>
+      <div class="tool-card card-blue">Use your trigger plan <span>🎯</span></div>
+      <div class="tool-card card-gray">Goal trainer (locked) <span>⛳</span></div>
+      <div class="chart-section">
+        <div class="chart-title">Your Mood Scores Over Time</div>
+        <div class="placeholder-chart"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="design2" class="page">
+    <div class="app">
+      <div class="profile-card">
+        <div class="avatar">👩🏽‍💻</div>
+        <div class="user-info">
+          <strong>Wahab Khan</strong>
+          <span>Product Designer</span>
+        </div>
+      </div>
+      <div class="course-list">
+        <div class="course"><span>Design Strategy</span><span>89%</span></div>
+        <div class="course"><span>Client Management</span><span>100%</span></div>
+        <div class="course"><span>Security Basics</span><span>0%</span></div>
+        <div class="course" style="justify-content: center; padding-top: 1rem;">
+          <button style="padding: 0.5rem 1rem; background: #10b981; border: none; border-radius: 10px; color: white;">
+            BUY NOW from UI8
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="design3" class="page">
+    <div class="app">
+      <div class="chat-header">
+        <img src="https://via.placeholder.com/48" alt="User" />
+        <div class="name">Barry Spencer</div>
+      </div>
+      <div class="chat-thread">
+        <div class="chat-bubble bubble-received">Hey, how are things going?</div>
+        <div class="chat-bubble bubble-sent">Pretty good! Just wrapped up the UI mockups.</div>
+        <div class="chat-bubble bubble-received">Awesome. Looking forward to seeing them.</div>
+        <div class="chat-bubble bubble-sent">Uploading them now.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="design4" class="page">
+    <div class="app">
+      <h2 style="text-align:center;">Finance Overview</h2>
+      <div class="balance-card">
+        <h2>$4,820.75</h2>
+        <p>Total Balance</p>
+      </div>
+      <div class="overview-grid">
+        <div class="overview-card"><h4>Income</h4><span>$2,150</span></div>
+        <div class="overview-card"><h4>Expenses</h4><span>$980</span></div>
+        <div class="overview-card"><h4>Savings</h4><span>$1,300</span></div>
+        <div class="overview-card"><h4>Investments</h4><span>$1,390</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="design5" class="page">
+    <div class="app">
+      <h2 style="text-align:center;">Explore Media</h2>
+      <div class="media-grid">
+        <div class="media-tile">
+          <img src="https://picsum.photos/150/100?random=1" alt="Podcast" />
+          <span>Podcast: Tech Talk</span>
+        </div>
+        <div class="media-tile">
+          <img src="https://picsum.photos/150/100?random=2" alt="Movie" />
+          <span>Movie: Retro Vibes</span>
+        </div>
+        <div class="media-tile">
+          <img src="https://picsum.photos/150/100?random=3" alt="Music" />
+          <span>Music: Synthwave</span>
+        </div>
+        <div class="media-tile">
+          <img src="https://picsum.photos/150/100?random=4" alt="TV" />
+          <span>TV: Classic Series</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentPage = 1;
+    function showPage(n) {
+      if (n === currentPage) return;
+      document.getElementById('design' + currentPage).classList.remove('active');
+      document.getElementById('design' + n).classList.add('active');
+      currentPage = n;
+    }
+  </script>
+
+</body>
+</html>
